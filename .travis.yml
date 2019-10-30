@@ -9,3 +9,16 @@ before_install:
 script:
   - docker run -e CI=true griffenclark/docker-react npm run test -- --coverage
 
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-2"
+  app: "react-app-server"
+  env: ReactAppServer-env
+  bucket_name: "elasticbeanstalk-us-east-2-042203086804"
+  bucket_path: "react-app-server"
+  on:
+    branch: master
+  access_key_id: 
+    secure: "$AWS_ACCESS_KEY"
+  secret_access_key:  
+    secure: "$AWS_SECRET_KEY"
